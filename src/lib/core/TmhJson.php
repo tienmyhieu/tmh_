@@ -16,7 +16,8 @@ readonly class TmhJson
 
     public function entity(string $path, string $file): array
     {
-        return $this->loadFile(__DIR__ . '/../../entities' . $path . '/', $file);
+        $path = 0 < strlen($path) ? $path . '/' : $path;
+        return $this->loadFile(__DIR__ . '/../../entities/' . $path, $file);
     }
 
     public function locale(string $locale): array
