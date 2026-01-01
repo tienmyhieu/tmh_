@@ -1,0 +1,9 @@
+{
+  "vi": { "active": "1", "locale": "vi-VN", "native_name": "Tiếng Việt", "translation": "bjz13fdk" },
+  "ja": { "active": "1", "locale": "ja-JP", "native_name": "日本語", "translation": "npnneizp" },
+  "zh-hans": { "active": "1", "locale": "zh-Hans", "native_name": "中文 简体", "translation": "fm5r1isz" },
+  "zh-hant": { "active": "1", "locale": "zh-Hant", "native_name": "中文 繁體", "translation": "gvwklue3" },
+  "fr": { "active": "1", "locale": "fr-FR", "native_name": "Français", "translation": "bz93sqlw" },
+  "en": { "active": "1", "locale": "en-GB", "native_name": "English", "translation": "hisnjifi" },
+  "de": { "active": "1", "locale": "de-DE", "native_name": "Deutsch", "translation": "ro8a92yv" }
+}
