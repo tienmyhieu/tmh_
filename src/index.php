@@ -17,11 +17,12 @@ require_once('lib/core/TmhLocale.php');
 require_once('lib/core/TmhRoute.php');
 require_once('lib/core/TmhRouteController.php');
 
+
 $json = new TmhJson();
 $domain = new TmhDomain($json);
 $locale = new TmhLocale($domain, $json);
 $route = new TmhRoute($json);
-$routeController = new TmhRouteController($locale, $route);
+$routeController = new TmhRouteController($domain, $locale, $route);
 $entityController = new TmhEntityController($json, $routeController);
 $entity = $entityController->find();
 //echo "<pre>";
