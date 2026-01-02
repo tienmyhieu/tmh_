@@ -21,15 +21,22 @@ class TmhRouteController
     public function find(): array
     {
         if (in_array($this->requestedRoute, array_keys($this->routeKeys))) {
-            return $this->routes[$this->routeKeys[$this->requestedRoute]];
+            $uuid = $this->routeKeys[$this->requestedRoute];
+            $route = $this->routes[$uuid];
+            $route['uuid'] = $uuid;
+            return $route;
         }
 
         $this->routeParts = explode('/', $this->requestedRoute);
         if (1 < count($this->routeParts)) {
-            return $this->childRoute();
+            $route = $this->childRoute();
+            $route['uuid'] = '';
+            return $route;
         }
 
-        return $this->route->defaultRoute();
+        $route =  $this->route->defaultRoute();
+        $route['uuid'] = TmhRoute::DEFAULT_ROUTE;
+        return $route;
     }
 
     public function parent(): array

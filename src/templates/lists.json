@@ -1,6 +1,1 @@
-{
-  "siblings": "||siblings||",
-  "ancestors": "||ancestors||",
-  "title": "||title||",
-  "topics": "||topics||"
-}
+["siblings", "ancestors", "title", "topics"]

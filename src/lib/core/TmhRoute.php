@@ -4,7 +4,7 @@ namespace lib\core;
 
 readonly class TmhRoute
 {
-    private const string DEFAULT_ROUTE = 'umd0xr1h';
+    public const string DEFAULT_ROUTE = 'umd0xr1h';
 
     private string $route;
     private array $routes;
