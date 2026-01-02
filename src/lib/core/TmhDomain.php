@@ -25,6 +25,12 @@ readonly class TmhDomain
         return $this->domains;
     }
 
+    public function getHost(): string
+    {
+        $domainParts = explode('.', $_SERVER['SERVER_NAME']);
+        return $domainParts[count($domainParts) - 2] . '.' . $domainParts[count($domainParts) - 1];
+    }
+
     public function getLanguage(): string
     {
         return substr($this->domain['locale'], 0, 2);

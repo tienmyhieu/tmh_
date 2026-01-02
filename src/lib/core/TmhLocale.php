@@ -12,12 +12,17 @@ readonly class TmhLocale
     {
         $this->language = $this->domain->getLanguage();
         $this->locale = $this->domain->getLocale();
-        $this->locales = $this->json->locale($this->locale);
+        $this->locales = $this->getLocales($this->locale);
     }
 
     public function get(string $uuid): string
     {
         return in_array($uuid, array_keys($this->locales)) ? $this->locales[$uuid] : $uuid;
+    }
+
+    public function getLocales(string $locale): array
+    {
+        return $this->json->locale($locale);
     }
 
     public function getMany(array $uuids): array

@@ -13,6 +13,7 @@ readonly class TmhEntityController
         $route = $this->routeController->find();
         $entity = $this->getEntityByRouteCode($route['code']);
         $entity['template'] = $this->getTemplate($route['type']);
+        $entity['siblings'] = $this->siblings($route);
         return array_merge($route, $entity);
     }
 
@@ -31,5 +32,10 @@ readonly class TmhEntityController
             'metal_emperor_coin_specimen' => 'specimen',
             default => 'lists'
         };
+    }
+
+    private function siblings(array $route): array
+    {
+        return $this->routeController->siblings($route);
     }
 }

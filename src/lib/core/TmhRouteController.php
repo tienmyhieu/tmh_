@@ -42,11 +42,24 @@ class TmhRouteController
         return $this->ancestorRoute();
     }
 
-    public function siblings(): array
+    public function siblings(array $route): array
     {
         $siblings = [];
         $currentDomain = $this->domain->domain();
         $domains = $this->domain->domains();
+        $host = $this->domain->getHost();
+        foreach ($domains as $domain) {
+            if ($domain['locale'] != $currentDomain['locale']) {
+                $subDomain = substr($domain['locale'], 0, 2);
+                if ($subDomain == 'zh') {
+                    $subDomain = strtolower($domain['locale']);
+                }
+                $baseUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $subDomain  . '.' . $host;
+                $domain['baseUrl'] = $baseUrl;
+                $locales = $this->locale->getLocales($domain['locale']);
+                $siblings[] = $this->translateDomainRoute($domain, $route, $locales);
+            }
+        }
         return $siblings;
     }
 
@@ -115,5 +128,19 @@ class TmhRouteController
             $transformed[$key] = $routeKey;
         }
         $this->routeKeys = $transformed;
+    }
+
+    private function translateDomainRoute(array $domain, array $route, array $locales): array
+    {
+        $translated = ['innerHtml' => $domain['native_name'], 'href' => [], 'title' => []];
+        $translated['href'][] = $domain['baseUrl'];
+        foreach ($route['href'] as $uuid) {
+            $translated['href'][] = $locales[$uuid];
+        }
+        $translated['title'][] = $this->locale->get($domain['translation']) . ' -';
+        foreach ($route['title'] as $uuid) {
+            $translated['title'][] = $locales[$uuid];
+        }
+        return $translated;
     }
 }
