@@ -48,12 +48,12 @@ class TmhRouteController
         $currentDomain = $this->domain->domain();
         $domains = $this->domain->domains();
         $host = $this->domain->getHost();
-        foreach ($domains as $domain) {
+        foreach ($domains as $subDomain => $domain) {
             if ($domain['locale'] != $currentDomain['locale']) {
-                $subDomain = substr($domain['locale'], 0, 2);
-                if ($subDomain == 'zh') {
-                    $subDomain = strtolower($domain['locale']);
-                }
+//                $subDomain = substr($domain['locale'], 0, 2);
+//                if ($subDomain == 'zh') {
+//                    $subDomain = strtolower($domain['locale']);
+//                }
                 $baseUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $subDomain  . '.' . $host;
                 $domain['baseUrl'] = $baseUrl;
                 $locales = $this->locale->getLocales($domain['locale']);
@@ -135,7 +135,11 @@ class TmhRouteController
         $translated = ['innerHtml' => $domain['native_name'], 'href' => [], 'title' => []];
         $translated['href'][] = $domain['baseUrl'];
         foreach ($route['href'] as $uuid) {
-            $translated['href'][] = $locales[$uuid];
+            $translated['href'][] = str_replace(' ', '_', $locales[$uuid]);
+        }
+        if ($route['type'] == 'metal_emperor_coin_specimen') {
+            $codeParts = explode('.', $route['code']);
+            $translated['href'][] = $codeParts[count($codeParts) - 1];
         }
         $translated['title'][] = $this->locale->get($domain['translation']) . ' -';
         foreach ($route['title'] as $uuid) {

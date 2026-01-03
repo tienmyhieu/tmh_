@@ -17,7 +17,6 @@ require_once('lib/core/TmhLocale.php');
 require_once('lib/core/TmhRoute.php');
 require_once('lib/core/TmhRouteController.php');
 
-
 $json = new TmhJson();
 $domain = new TmhDomain($json);
 $locale = new TmhLocale($domain, $json);

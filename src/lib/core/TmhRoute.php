@@ -42,6 +42,7 @@ readonly class TmhRoute
                 $route['title'] = [$last];
                 break;
             case 3:
+            case 4:
                 $last = $route['href'][count($href) - 1];
                 $secondLast = $route['href'][count($href) - 2];
                 $route['innerHtml'] = $last;
